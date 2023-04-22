@@ -17,11 +17,12 @@ Bookmark.destroy_all
 puts "Creating lists...."
 list = []
 10.times do
-  list_item = List.create(name: Faker::Book.genre)
+  list_item = List.create!(name: Faker::Book.unique.genre)
   puts "Adding list # #{list_item.id}"
   puts "List valid? #{list_item.valid?}"
   puts "Errors: #{list_item.errors.messages}"
   list << list_item
+  p list
 end
 
 puts "Creating movies...."
@@ -31,7 +32,7 @@ movies = JSON.parse(movies_file)['results']
 
 movies_arr = []
 movies.each do |m|
-  movie = Movie.create(
+  movie = Movie.create!(
     title: m["original_title"],
     overview: m["overview"],
     poster_url: "https://image.tmdb.org/t/p/original#{m["poster_path"]}",
@@ -43,11 +44,12 @@ movies.each do |m|
   puts "Errors: #{movie.errors.messages}"
 end
 
-puts "Creating movies...."
+puts "Creating bookmarks...."
 20.times do
-  bookmark = Bookmark.create(comment: Faker::Restaurant.review)
+  bookmark = Bookmark.new(comment: Faker::Restaurant.unique.review)
   bookmark.movie = movies_arr.sample
   bookmark.list = list.sample
+  bookmark.save!
   puts "Adding bookmark# #{bookmark.id}"
   puts "Bookmark valid? #{bookmark.valid?}"
   puts "Errors: #{bookmark.errors.messages}"
