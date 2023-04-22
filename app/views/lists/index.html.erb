@@ -1,4 +1,8 @@
 <h1>My Lists</h1>
-
-<% @lists.each do |list| %>
-<%  %>
+<ul>
+  <% @lists.each do |list| %>
+  <li>
+    <%= list.name %>
+  </li>
+  <% end %>
+</ul>

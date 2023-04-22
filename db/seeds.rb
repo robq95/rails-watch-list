@@ -23,6 +23,8 @@ list = []
   puts "Errors: #{list_item.errors.messages}"
   list << list_item
   p list
+  puts "Bookmark valid? #{list_item.valid?}"
+  puts "Errors: #{list_item.errors.messages}"
 end
 
 puts "Creating movies...."
@@ -39,7 +41,7 @@ movies.each do |m|
     rating: m["vote_average"]
   )
   movies_arr << movie
-  puts "Adding movie # #{movie.id}"
+  p movie
   puts "Movie valid? #{movie.valid?}"
   puts "Errors: #{movie.errors.messages}"
 end
@@ -50,7 +52,7 @@ puts "Creating bookmarks...."
   bookmark.movie = movies_arr.sample
   bookmark.list = list.sample
   bookmark.save!
-  puts "Adding bookmark# #{bookmark.id}"
+  p bookmark
   puts "Bookmark valid? #{bookmark.valid?}"
   puts "Errors: #{bookmark.errors.messages}"
 end
