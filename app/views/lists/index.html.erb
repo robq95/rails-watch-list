@@ -1,10 +1,15 @@
 <h1>My Lists</h1>
 <ul>
   <% @lists.each do |list| %>
-  <li>
-    <%= link_to "#{list.name}", list_path(list) %>
-  </li>
+    <div class="card bg-light mb-3" style="max-width: 18rem;">
+    <div class="card-header">Header</div>
+      <div class="card-body">
+        <h5 class="card-title">
+          <%= link_to "#{list.name}", list_path(list) %>
+        </h5>
+      </div>
+    </div>
   <% end %>
 </ul>
 
-<%= link_to "Create a New List", new_list_path %>
+<%= link_to "Create a New List", new_list_path, class: 'btn btn-primary' %>
